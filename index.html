@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Puush.Fun Deployments</title>
+  <style>
+    h1 {
+      text-align: center;
+      color: #282c34;
+    }
+    body {
+      background-color: #4b4a52;
+      font-family: Arial, sans-serif;
+      font-size: 0.875em;
+      color: #b6b6b6;
+      margin: 0;
+      padding: 0;
+    }
+
+    .table-container {
+      display: flex;
+      justify-content: center;
+      margin: 20px auto;
+    }
+
+    table {
+      width: 85%;
+      border-collapse: separate;
+      border-spacing: 0 10px;
+      background-color: #282c34;
+      position: relative;
+    }
+
+    table td, table th {
+      text-align: center;
+      width: 5px;
+      max-width: 20px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding: 10px;
+      color: #b6b6b6;
+      position: relative; /* Needed for tooltip positioning */
+    }
+
+    table th.narrow, table td.narrow {
+      width: 5px;
+      padding: 5px;
+    }
+
+    table tr {
+      background-color: #1e1e1e;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    table tr td:first-child, table tr th:first-child {
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+
+    table tr td:last-child, table tr th:last-child {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+    a {
+      color: #11b7af;
+      text-decoration: none;
+    }
+
+    a:visited {
+      color: #11b7af;
+    }
+
+    /* Tooltip styling */
+    .tooltip {
+      position: absolute;
+      background-color: #333;
+      color: #fff;
+      padding: 0px;
+      border-radius: 5px;
+      width: auto;
+      max-width: none;
+      text-align: center;
+      display: none;
+      z-index: 10000;
+      font-size: 1em;
+    }
+
+    table td:hover .tooltip {
+      display: block;
+      opacity: 1;
+      top: 0px; /* Position above the cell */
+      left: 50%; /* Center horizontally or adjust as needed */
+      transform: translateX(-50%);
+    }
+ 
+  </style>
+</head>
+<body>
+  <h1>Puush.Fun Deployments</h1>
+  <div class="table-container">
+    <table id="data-table">
+      <thead>
+        <tr>
+          <th class="narrow">Transaction ID</th>
+          <th class="narrow">Block</th>
+          <th>Date</th>
+          <th>Deployer</th>
+          <th>Initial Cro</th>
+          <th class="narrow">Name</th>
+          <th class="narrow">Symbol</th>
+          <th class="narrow">Dev Balance</th>
+          <th class="narrow">Fresh Wallet</th>
+          <th class="narrow">Prev. Ca's</th>
+          <th class="narrow">Contract</th> <!-- New column header -->
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data rows will be inserted here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // Function to convert Unix timestamp to formatted date string
+    function convertUnixTimestampToDate(unixTimestamp) {
+      var date = new Date(unixTimestamp * 1000); // Convert seconds to milliseconds
+      var monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"];
+      var month = monthNames[date.getMonth()];
+      var day = date.getDate();
+      var hours = ('0' + date.getHours()).slice(-2);
+      var minutes = ('0' + date.getMinutes()).slice(-2);
+      var seconds = ('0' + date.getSeconds()).slice(-2);
+      return `${month} ${day}, ${hours}:${minutes}:${seconds}`; // Custom format: Month Day, HH:MM:SS
+    }
+
+    function updateTable(data) {
+      console.log('Updating table with data:', data);
+      var tableBody = document.getElementById('data-table').getElementsByTagName('tbody')[0];
+      tableBody.innerHTML = ''; // Clear existing data
+
+      // Sort data by Date column in descending order
+      data.sort(function(a, b) {
+        return b[2] - a[2]; // Descending order based on Unix timestamp
+      });
+
+      // Slice the last 10 entries from the sorted data
+      var slicedData = data.slice(0, 10);
+
+      slicedData.forEach(function(row) {
+        var newRow = tableBody.insertRow();
+        row.forEach(function(cell, index) {
+          var newCell = newRow.insertCell();
+          var tooltip = document.createElement('div');
+          tooltip.className = 'tooltip';
+
+          if (index === 0) {
+            newCell.innerHTML = '<a href="' + encodeURI(cell) + '" target="_blank">' + cell + '</a>';
+            tooltip.textContent = cell;
+          } else if (index === 1) {
+            newCell.innerHTML = '<a href="http://www.cronoscan.com/block/' + cell + '" target="_blank">' + cell + '</a>';
+            tooltip.textContent = cell;
+          } else if (index === 2) {
+            newCell.textContent = convertUnixTimestampToDate(cell); // Convert Unix timestamp to formatted date
+            tooltip.textContent = cell;
+          } else if (index === 3) {
+            var address = cell;
+            var shortenedAddress = address.length > 10 ? address.slice(0, 6) + '...' + address.slice(-6) : address;
+            newCell.innerHTML = '<a href="http://www.cronoscan.com/address/' + address + '" target="_blank">' + shortenedAddress + '</a>';
+            tooltip.textContent = address;
+          } else if (index === 4) {
+            var value = parseFloat(cell);
+            newCell.textContent = value.toFixed(2);
+            tooltip.textContent = value.toFixed(2);
+          } else if (index === 10) {
+            // Handle the new Contract column
+            var contract = cell;
+            var truncatedContract = contract.length > 12 ? contract.slice(0, 6) + '...' + contract.slice(-6) : contract;
+            newCell.innerHTML = '<a href="http://www.puush.fun/coin/' + encodeURI(contract) + '" target="_blank">' + truncatedContract + '</a>';
+            tooltip.textContent = contract;
+          } else {
+            newCell.textContent = cell;
+            tooltip.textContent = cell;
+          }
+          
+          newCell.appendChild(tooltip);
+
+          if (index >= 5 && index <= 10) {
+            newCell.classList.add('narrow');
+          }
+        });
+      });
+    }
+
+    function fetchData() {
+      console.log('Fetching data...');
+      fetch('https://script.google.com/macros/s/AKfycbyGYoz8UW8sMO5AZXpfwxjqWLqDHi6spyhUbwlpbsCuER6L854zV56YK9CkHKeiO_Hp5w/exec')
+        .then(response => response.json())
+        .then(data => updateTable(data))
+        .catch(error => console.error('Error fetching data:', error));
+    }
+
+      setInterval(fetchData, 5000);
+    
+      
+    document.addEventListener('DOMContentLoaded', fetchData);
+  </script>
+</body>
+</html>
