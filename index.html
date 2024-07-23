@@ -2,100 +2,129 @@
 <html>
 <head>
   <title>Puush.Fun Deployments</title>
-  <style>
-    h1 {
-      text-align: center;
-      color: #282c34;
-    }
-    body {
-      background-color: #4b4a52;
-      font-family: Arial, sans-serif;
-      font-size: 0.875em;
-      color: #b6b6b6;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+  /* Styles for the main heading */
+  h1 {
+    text-align: center; /* Center align the heading text */
+    color: #5bc781; /* Set the text color */
+  }
 
-    .table-container {
-      display: flex;
-      justify-content: center;
-      margin: 20px auto;
-    }
+  /* Styles for the body */
+  body {
+    background-color: #4b4a52; /* Set the background color of the body */
+    font-family: Arial, sans-serif; /* Set the font family */
+    font-size: 0.8em; /* Set the font size */
+    color: #b6b6b6; /* Set the text color */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+  }
 
-    table {
-      width: 85%;
-      border-collapse: separate;
-      border-spacing: 0 10px;
-      background-color: #282c34;
-      position: relative;
-    }
+  /* Styles for the table container */
+  .table-container {
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center the table horizontally */
+    margin: 20px auto; /* Add margin around the container */
+    padding: 0 20px; /* Add horizontal padding to the container */
+  }
 
-    table td, table th {
-      text-align: center;
-      width: 5px;
-      max-width: 20px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      padding: 10px;
-      color: #b6b6b6;
-      position: relative; /* Needed for tooltip positioning */
-    }
+  /* Styles for the table */
+  table {
+    width: 85%; /* Set the table width to make the background wider */
+    border-collapse: separate; /* Separate borders for table cells */
+    border-spacing: 0 10px; /* Add vertical spacing between rows */
+    background-color: #282c34; /* Set the background color of the table */
+    position: relative; /* Set position to relative for positioning child elements */
+    padding: 30px; /* Add padding to create more space around the rows */
+  }
 
-    table th.narrow, table td.narrow {
-      width: 5px;
-      padding: 5px;
-    }
+  /* Styles for table cells and headers */
+  table td, table th {
+    text-align: center; /* Center align the text */
+    width: 5px; /* Set a small width for cells */
+    max-width: 10px; /* Set a maximum width for cells */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Show ellipsis for overflow text */
+    white-space: nowrap; /* Prevent text from wrapping */
+    padding: 10px; /* Add padding for bubble effect makes roes thinner*/
+    color: #b6b6b6; /* Set the text color */
+    position: relative; /* Set position to relative for tooltip positioning */
+  }
 
-    table tr {
-      background-color: #1e1e1e;
-      border-radius: 10px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+    table th.width, table td.width {
+    width: 5px;
+    padding: 10px 12px;
+}
+    table th.date, table td.date {
+    width: 10px;
+    padding: 10px 15px;
+}
 
-    table tr td:first-child, table tr th:first-child {
-      border-top-left-radius: 10px;
-      border-bottom-left-radius: 10px;
-    }
 
-    table tr td:last-child, table tr th:last-child {
-      border-top-right-radius: 10px;
-      border-bottom-right-radius: 10px;
-    }
+    table th.deployer, table td.deployer {
+    width: 10px;
+    padding: 10px 15px;
+}
 
-    a {
-      color: #11b7af;
-      text-decoration: none;
-    }
+  /* Styles for narrow table cells and headers */
+  table th.narrow, table td.narrow {
+    width: 5px; /* Set a small width for narrow cells */
+    padding: 10px; /* Increase padding for narrow cells */
+  }
 
-    a:visited {
-      color: #11b7af;
-    }
+  /* Styles for table rows */
+  table tr {
+    background-color: #1e1e1e; /* Set the background color of the row */
+    border-radius: 10px; /* Apply a small border-radius for the bubble effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for the bubble effect */
+  }
 
-    /* Tooltip styling */
-    .tooltip {
-      position: absolute;
-      background-color: #333;
-      color: #fff;
-      padding: 0px;
-      border-radius: 5px;
-      width: auto;
-      max-width: none;
-      text-align: center;
-      display: none;
-      z-index: 10000;
-      font-size: 1em;
-    }
+  /* Styles for the first cell in each row to round the left corners */
+  table tr td:first-child, table tr th:first-child {
+    border-top-left-radius: 20px; /* Round the top-left corner */
+    border-bottom-left-radius: 20px; /* Round the bottom-left corner */
+  }
 
-    table td:hover .tooltip {
-      display: block;
-      opacity: 1;
-      top: 0px; /* Position above the cell */
-      left: 50%; /* Center horizontally or adjust as needed */
-      transform: translateX(-50%);
-    }
- 
-  </style>
+  /* Styles for the last cell in each row to round the right corners */
+  table tr td:last-child, table tr th:last-child {
+    border-top-right-radius: 20px; /* Round the top-right corner changes the row corners*/
+    border-bottom-right-radius: 20px; /* Round the bottom-right corner */
+  }
+
+  /* Styles for links */
+  a {
+    color: #11b7af; /* Set the link color */
+    text-decoration: none; /* Remove underline from links */
+  }
+
+  /* Styles for visited links */
+  a:visited {
+    color: #11b7af; /* Set the color for visited links */
+  }
+
+  /* Tooltip styling */
+  .tooltip {
+    position: absolute; /* Set position to absolute for positioning relative to parent */
+    background-color: #333; /* Set the background color */
+    color: #fff; /* Set the text color */
+    padding: 0px; /* Remove default padding */
+    border-radius: 5px; /* Apply border-radius to the tooltip */
+    width: auto; /* Set the width to auto */
+    max-width: none; /* Remove the maximum width */
+    text-align: center; /* Center align the text */
+    display: none; /* Hide the tooltip by default */
+    z-index: 10000; /* Set a high z-index to ensure it appears above other elements */
+    font-size: 1em; /* Set the font size */
+  }
+
+  /* Display the tooltip on hover */
+  table td:hover .tooltip {
+    display: block; /* Show the tooltip */
+    opacity: 1; /* Set opacity to 1 for visibility */
+    top: 0px; /* Position the tooltip above the cell */
+    left: 50%; /* Center the tooltip horizontally */
+    transform: translateX(-50%); /* Center align using transform */
+  }
+</style>
 </head>
 <body>
   <h1>Puush.Fun Deployments</h1>
@@ -103,17 +132,17 @@
     <table id="data-table">
       <thead>
         <tr>
-          <th class="narrow">Transaction ID</th>
-          <th class="narrow">Block</th>
-          <th>Date</th>
-          <th>Deployer</th>
-          <th>Initial Cro</th>
+          <th class="width">Transaction ID</th>
+          <th>Block</th>
+          <th class="date">Date</th>
+          <th class="deployer">Deployer</th>
+          <th class="narrow">Initial Cro</th>
           <th class="narrow">Name</th>
           <th class="narrow">Symbol</th>
           <th class="narrow">Dev Balance</th>
           <th class="narrow">Fresh Wallet</th>
           <th class="narrow">Prev. Ca's</th>
-          <th class="narrow">Contract</th> <!-- New column header -->
+          <th class="deployer">Contract</th> <!-- New column header -->
         </tr>
       </thead>
       <tbody>
@@ -157,25 +186,31 @@
           tooltip.className = 'tooltip';
 
           if (index === 0) {
+            newCell.classList.add('width');
             newCell.innerHTML = '<a href="' + encodeURI(cell) + '" target="_blank">' + cell + '</a>';
             tooltip.textContent = cell;
           } else if (index === 1) {
+            
             newCell.innerHTML = '<a href="http://www.cronoscan.com/block/' + cell + '" target="_blank">' + cell + '</a>';
             tooltip.textContent = cell;
           } else if (index === 2) {
+            newCell.classList.add('date');  
             newCell.textContent = convertUnixTimestampToDate(cell); // Convert Unix timestamp to formatted date
             tooltip.textContent = cell;
           } else if (index === 3) {
+            newCell.classList.add('deployer');  
             var address = cell;
             var shortenedAddress = address.length > 10 ? address.slice(0, 6) + '...' + address.slice(-6) : address;
             newCell.innerHTML = '<a href="http://www.cronoscan.com/address/' + address + '" target="_blank">' + shortenedAddress + '</a>';
             tooltip.textContent = address;
           } else if (index === 4) {
+            newCell.classList.add('narrow');  
             var value = parseFloat(cell);
             newCell.textContent = value.toFixed(2);
             tooltip.textContent = value.toFixed(2);
           } else if (index === 10) {
             // Handle the new Contract column
+            newCell.classList.add('deployer');  
             var contract = cell;
             var truncatedContract = contract.length > 12 ? contract.slice(0, 6) + '...' + contract.slice(-6) : contract;
             newCell.innerHTML = '<a href="http://www.puush.fun/coin/' + encodeURI(contract) + '" target="_blank">' + truncatedContract + '</a>';
@@ -187,7 +222,7 @@
           
           newCell.appendChild(tooltip);
 
-          if (index >= 5 && index <= 10) {
+          if (index >= 5 && index <= 9) {
             newCell.classList.add('narrow');
           }
         });
@@ -196,7 +231,7 @@
 
     function fetchData() {
       console.log('Fetching data...');
-      fetch('https://script.google.com/macros/s/AKfycbyGYoz8UW8sMO5AZXpfwxjqWLqDHi6spyhUbwlpbsCuER6L854zV56YK9CkHKeiO_Hp5w/exec')
+      fetch('https://script.google.com/macros/s/AKfycbyBP4EeK7YWsK0aW3rs3bttWFgDaRxcqNAQ_Rzz2Q6nhacT37UoRdsYHgiYWV_uawLF/exec')
         .then(response => response.json())
         .then(data => updateTable(data))
         .catch(error => console.error('Error fetching data:', error));
@@ -209,3 +244,4 @@
   </script>
 </body>
 </html>
+
