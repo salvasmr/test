@@ -93,27 +93,27 @@
     }
 
     /* Tooltip styling */
-   /* .tooltip {
+    /*.tooltip {
       position: absolute;
       background-color: #333;
       color: #fff;
       padding: 5px;
       border-radius: 5px;
       width: auto;
-      max-width: 200px; /* Add max-width to prevent overly wide tooltips 
+      max-width: 200px; /* Add max-width to prevent overly wide tooltips
       text-align: center;
       display: none;
       z-index: 10000;
       font-size: 0.9em;
     }*/
 
-    table td:hover .tooltip {
+    /*table td:hover .tooltip {
       display: block;
       opacity: 1;
       top: 0;
       left: 50%;
       transform: translateX(-50%);
-    }
+    }*/
 
     /* Responsive Design */
     @media (max-width: 1200px) {
@@ -137,7 +137,20 @@
       }
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 450px) {
+      table th:nth-child(1),
+      table td:nth-child(1),
+      table th:nth-child(2),
+      table td:nth-child(2),
+      table th:nth-child(5),
+      table td:nth-child(5),
+      table th:nth-child(10),
+      table td:nth-child(10),
+      table th:nth-child(11),
+      table td:nth-child(11) {
+        display: none; /* Hide columns for smaller screens */
+      }
+
       table th, table td {
         display: block; /* Stack cells vertically */
         width: 100%;
@@ -225,40 +238,51 @@
             var txHash = cell.split('/').pop(); // Extract the transaction hash from the URL
             var shortenedTxHash = txHash.slice(0, 6) + '...' + txHash.slice(-6); // Shorten the transaction hash
             newCell.innerHTML = '<a href="' + encodeURI(cell) + '" target="_blank">' + shortenedTxHash + '</a>';
-            
-
-
-          
+            newCell.setAttribute('data-label', 'Transaction ID');
           } else if (index === 1) {
             newCell.innerHTML = '<a href="http://www.cronoscan.com/block/' + cell + '" target="_blank">' + cell + '</a>';
-            
-          
-         
+            newCell.setAttribute('data-label', 'Block');
           } else if (index === 2) {
             newCell.classList.add('date');  
             newCell.textContent = convertUnixTimestampToDate(cell);
-            
-         
-         
+            newCell.setAttribute('data-label', 'Date');
           } else if (index === 3) {
             newCell.classList.add('deployer');  
             var address = cell;
             var shortenedAddress = address.length > 10 ? address.slice(0, 6) + '...' + address.slice(-6) : address;
             newCell.innerHTML = '<a href="http://www.cronoscan.com/address/' + address + '" target="_blank">' + shortenedAddress + '</a>';
-            
-         
-         
+            newCell.setAttribute('data-label', 'Deployer');
           } else if (index === 4) {
             newCell.classList.add('narrow');  
             var value = parseFloat(cell);
             newCell.textContent = value.toFixed(2);
-            //tooltip.textContent = value.toFixed(2);
-         
+            newCell.setAttribute('data-label', 'Initial Cro');
+          } else if (index === 5) {
+            newCell.classList.add('narrow');
+            newCell.textContent = cell;
+            newCell.setAttribute('data-label', 'Name');
+          } else if (index === 6) {
+            newCell.classList.add('narrow');
+            newCell.textContent = cell;
+            newCell.setAttribute('data-label', 'Symbol');
+          } else if (index === 7) {
+            newCell.classList.add('narrow');
+            newCell.textContent = cell;
+            newCell.setAttribute('data-label', 'Dev Balance');
+          } else if (index === 8) {
+            newCell.classList.add('narrow');
+            newCell.textContent = cell;
+            newCell.setAttribute('data-label', 'Fresh Wallet');
+          } else if (index === 9) {
+            newCell.classList.add('narrow');
+            newCell.textContent = cell;
+            newCell.setAttribute('data-label', 'Prev. Ca\'s');
           } else if (index === 10) {
             newCell.classList.add('deployer');  
             var contract = cell;
             var truncatedContract = contract.length > 12 ? contract.slice(0, 6) + '...' + contract.slice(-6) : contract;
             newCell.innerHTML = '<a href="http://www.puush.fun/coin/' + encodeURI(contract) + '" target="_blank">' + truncatedContract + '</a>';
+            newCell.setAttribute('data-label', 'Contract');
             tooltip.textContent = contract;
                 
           } else {
