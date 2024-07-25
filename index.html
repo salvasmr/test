@@ -43,7 +43,7 @@
             border-collapse: separate;
             border-spacing: 0 10px;
             background-color: #282c34;
-            padding: 30px ;
+            padding: 30px 30px 30px 30px ; /* controls size of grey background top right bottom left*/
             table-layout: auto;
         }
 
@@ -136,13 +136,26 @@
             table td:nth-child(11) {
                 display: none;
             }
+            
+  table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            background-color: transparent;
+            padding: 0px 0px 0px 0px ; /* controls size of grey background top right bottom left*/
+            table-layout: auto;
+            
+        }
+            
 
             table tr {
                 display: block;
                 border: 0.5px solid #5bc781;
-                margin-bottom: 25px;
+                margin-bottom: 25px; /*controls distance of blocks(cells)*/
+                margin-right: 0px;
                 border-radius: 10px;
                 padding: 10px;
+                background:#282c34;
             }
 
             table th, table td {
@@ -151,10 +164,13 @@
                 box-sizing: border-box;
                 text-align: left;
                 margin-bottom: 10px;
+               
+                
             }
 
             table thead {
                 display: none;
+                
             }
 
             table td {
@@ -170,7 +186,7 @@
                 padding-left: 10px;
                 white-space: nowrap;
                 font-weight: bold;
-                background: #1e1e1e;
+                background: #282c34;
                 color: #fff;
             }
 
@@ -178,9 +194,10 @@
         .footer-text {
             text-align: left;
             color: #b6b6b6;
-            margin-top: 0px;
+            margin-top: -40px;
             padding:0px;
             margin-left: 50px;
+            margin-right: 50px;
             font-size: 0.5em;
         }
 
@@ -230,7 +247,7 @@
         .footer-text {
             text-align: left;
             color: #b6b6b6;
-            margin-top: 0px;
+            margin-top: 10px;
             padding:0px;
             margin-left: 50px;
             font-size: 0.4em;
@@ -276,9 +293,9 @@
     
          <div class="footer-text">
              
-        <p>*<span class="header">Initial Cro:</span> 50 cro contract creation fee + how much deployer invested in supply.
+        <p>*<span class="header">Initial Cro:</span> How much supply deployer bought + 50cro launch fee.
         <br><span class="header">Dpl. Balance:</span> How much cro deployer had in his wallet after launch. 
-        <br> <span class="header">Fresh Wallet:</span> Was this wallet purposely created to launch this token? Yes or No. 
+        <br> <span class="header">Fresh Wallet:</span> Fresh wallet created to launch token. Yes or No. 
         <br> <span class="header">Previous Ca's:</span> Has this deployer launched other contracts in the past? If yes, number of previous contracts will show. If no, "New" will show. 
         
         </p>
