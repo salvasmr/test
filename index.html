@@ -32,7 +32,7 @@
         .table-container {
             display: flex;
             justify-content: center;
-            margin: 20px auto;
+            margin: 20px 20px -10px 20px;
             padding: 0 20px;
             overflow-x: auto;
         }
@@ -43,7 +43,7 @@
             border-collapse: separate;
             border-spacing: 0 10px;
             background-color: #282c34;
-            padding: 30px;
+            padding: 30px ;
             table-layout: auto;
         }
 
@@ -191,6 +191,25 @@
                 width: 10%;
             }
         }
+
+        /* Styles for the footer text */
+        .footer-text {
+            text-align: left;
+            color: #b6b6b6;
+            margin-top: 0px;
+            padding:0px;
+            margin-left: 50px;
+            font-size: 0.9em;
+        }
+
+        .header{
+            color: #11b7af; /* Tomato color */
+            font-weight: bold;
+            font-size: 0.9em;
+            
+        }
+
+        
     </style>
 </head>
 <body>
@@ -206,7 +225,7 @@
                     <th class="narrow">Initial Cro</th>
                     <th class="narrow">Name</th>
                     <th class="narrow">Symbol</th>
-                    <th class="narrow">Dev Balance</th>
+                    <th class="narrow">Dpl. Balance</th>
                     <th class="narrow">Fresh Wallet</th>
                     <th class="narrow">Prev. Ca's</th>
                     <th class="deployer">Contract</th>
@@ -216,6 +235,17 @@
                 <!-- Data rows will be inserted here -->
             </tbody>
         </table>
+        </div>
+    
+         <div class="footer-text">
+             
+        <p>*<splan class="header">Initial Cro:</splan> 50 cro contract creation fee + how much deployer invested in supply.
+        <br><splan class="header">Dpl. Balance:</splan> How much cro deployer currently has in his wallet. 
+        <br> <splan class="header">Fresh Wallet:</splan> Was this wallet purposely created to launch this token? Yes or No. 
+        <br> <splan class="header">Previous Ca's:</splan> Has this deployer launched other contracts in the past? If yes, number of previous contracts will show. If no, "New" will show. 
+        
+        </p>
+    
     </div>
 
     <script>
@@ -259,7 +289,7 @@
                         newCell.innerHTML = '<a href="' + encodeURI(cell) + '" target="_blank">' + shortenedTxHash + '</a>';
                         newCell.setAttribute('data-label', 'Transaction ID');
                     } else if (index === 1) {
-                        newCell.innerHTML = '<a href="http://www.cronoscan.com/block/' + cell + '" target="_blank">' + cell + '</a>';
+                        newCell.innerHTML = '<a href="http://www.cronoscan.com/block/' + cell + '" target="_blank">' + cell +                           '</a>';
                         newCell.setAttribute('data-label', 'Block');
                     } else if (index === 2) {
                         newCell.classList.add('date');
@@ -269,7 +299,7 @@
                         newCell.classList.add('deployer');
                         var address = cell;
                         var shortenedAddress = address.length > 10 ? address.slice(0, 6) + '...' + address.slice(-6) : address;
-                        newCell.innerHTML = '<a href="http://www.cronoscan.com/address/' + address + '" target="_blank">' + shortenedAddress + '</a>';
+                        newCell.innerHTML = '<a href="http://www.cronoscan.com/address/' + address + '" target="_blank">' +                            shortenedAddress + '</a>';
                         newCell.setAttribute('data-label', 'Deployer');
                     } else if (index === 4) {
                         newCell.classList.add('narrow');
