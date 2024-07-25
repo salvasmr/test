@@ -151,11 +151,13 @@
             table tr {
                 display: block;
                 border: 0.5px solid #5bc781;
-                margin-bottom: 25px; /*controls distance of blocks(cells)*/
+                margin-bottom: 15px; /*controls distance of blocks(cells)*/
                 margin-right: 0px;
                 border-radius: 10px;
-                padding: 10px;
+                padding: 20px;
                 background:#282c34;
+                overflow:hidden;
+                tex-overflow: ellipsis;
             }
 
             table th, table td {
@@ -194,7 +196,7 @@
         .footer-text {
             text-align: left;
             color: #b6b6b6;
-            margin-top: -40px;
+            margin-top: -30px;
             padding:0px;
             margin-left: 50px;
             margin-right: 50px;
@@ -256,7 +258,7 @@
         .header{
             color: #11b7af; /* Tomato color */
             font-weight: bold;
-            font-size: 0.4em;
+            font-size: 0.8em;
             
         }
         }
@@ -293,7 +295,7 @@
     
          <div class="footer-text">
              
-        <p>*<span class="header">Initial Cro:</span> How much supply deployer bought + 50cro launch fee.
+        <p><span class="header">Initial Cro:</span> How much supply deployer bought + 50cro launch fee.
         <br><span class="header">Dpl. Balance:</span> How much cro deployer had in his wallet after launch. 
         <br> <span class="header">Fresh Wallet:</span> Fresh wallet created to launch token. Yes or No. 
         <br> <span class="header">Previous Ca's:</span> Has this deployer launched other contracts in the past? If yes, number of previous contracts will show. If no, "New" will show. 
